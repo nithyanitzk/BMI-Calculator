@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="header">
+      <h1>BMI CALCULATOR</h1>
+    </div>
+    <div class="container">
+      <div class="input-group input-group-lg">
+        <span class="input-group-text" id="height_error">Height</span>
+        <input id="height" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+      </div>
+      <br>
+      <div class="input-group input-group-lg">
+        <span class="input-group-text" id="weight_error">Weight</span>
+        <input id ="weight" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+      </div>
+      <br>
+      <div class="container">
+      <div class="d-grid gap-2">
+        <button id="btn" class="btn btn-dark" type="button">CHECK HERE</button>
+        <p id="output"></p>
+      </div>
+      </div>
+    </div>
+
+    
+<script>
+  let button = document.getElementById('btn');
+
+button.addEventListener('click', () => {
+    const height = parseInt(document.getElementById('height').value);
+    const weight = parseInt(document.getElementById('weight').value);
+    const result = document.getElementById('output');
+    let height_status=false, weight_status=false;
+
+    if(height === '' || isNaN(height) || (height <= 0)){
+        document.getElementById('height_error').innerHTML = 'Please provide a valid height';
+    }else{
+        document.getElementById('height_error').innerHTML = '';
+        height_status=true;
+    }
+
+    if(weight === '' || isNaN(weight) || (weight <= 0)){
+        document.getElementById('weight_error').innerHTML = 'Please provide a valid weight';
+    }else{
+        document.getElementById('weight_error').innerHTML = '';
+        weight_status=true;
+    }
+
+    if(height_status && weight_status){
+        const bmi = (weight / ((height*height)/10000)).toFixed(2);
+
+        if(bmi < 18.6){
+            result.innerHTML = 'Under weight : ' + bmi;
+        }else if(bmi >= 18.6 && bmi < 24.9){
+            result.innerHTML = 'Normal : ' + bmi;
+        }else{
+            result.innerHTML = 'Over weight : ' + bmi;
+        }
+    }else{
+        alert('The form has errors');
+        result.innerHTML = '';
+    }
+});
+
+</script>
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+
+
+    </script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+  
+  </body>
+</html>
